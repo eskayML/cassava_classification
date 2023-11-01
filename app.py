@@ -10,19 +10,20 @@ model_path = "best_model.h5"
 model = load_model(model_path)
 
 name_map = dict(
-    cgm="Green Mite",
-        cmd="Mosaic Disease",
     cbb="Bacterial Blight",
-      healthy="Healthy",
     cbsd="Brown Streak Disease",
+    cgm="Green Mite",
+    cmd="Mosaic Disease",
+    healthy="Healthy",
 )
 
-labels = ['cgm','cmd','healthy','cbb','cbsd']
 
 class_labels = list(name_map.values())
 
 st.title("Cassava Classification App")
-st.markdown('Using pretrained machine learning algorithms 🧠🤖 to  identify and classify various diseases affecting cassava through  their leaves. 🍀🔍')
+st.markdown(
+    "Using pretrained machine learning algorithms 🧠🤖 to  identify and classify various diseases affecting cassava through  their leaves. 🍀🔍"
+)
 # Upload image through Streamlit
 uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
@@ -44,11 +45,11 @@ if uploaded_image is not None:
     # Display the predicted class and probabilities
     st.subheader("Prediction:")
     predicted_class_index = np.argmax(predictions)
-    st.success(f"Predicted Disease   ======>  '{class_labels[predicted_class_index].upper()}'")
+    st.success(
+        f"Predicted Disease ======>  '{class_labels[predicted_class_index].upper()}'"
+    )
 
     class_probs = [i.round(4) for i in predictions[0]]
     print(class_probs)
-    prob_dict= dict(zip(class_labels,class_probs))
-    st.info(f'Probability Distribution ====>  {prob_dict}')
-
-
+    prob_dict = dict(zip(class_labels, class_probs))
+    st.info(f"Probability Distribution ====>  {prob_dict}")
