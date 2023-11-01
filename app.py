@@ -10,13 +10,14 @@ model_path = "best_model.h5"
 model = load_model(model_path)
 
 name_map = dict(
-    cbb="Bacterial Blight",
-    cbsd="Brown Streak Disease",
     cgm="Green Mite",
-    cmd="Mosaic Disease",
-    healthy="Healthy",
+        cmd="Mosaic Disease",
+    cbb="Bacterial Blight",
+      healthy="Healthy",
+    cbsd="Brown Streak Disease",
 )
 
+labels = ['cgm','cmd','healthy','cbb','cbsd']
 
 class_labels = list(name_map.values())
 
@@ -43,7 +44,7 @@ if uploaded_image is not None:
     # Display the predicted class and probabilities
     st.subheader("Prediction:")
     predicted_class_index = np.argmax(predictions)
-    st.success(f"Predicted Disease ======>  '{class_labels[predicted_class_index].upper()}'")
+    st.success(f"Predicted Disease   ======>  '{class_labels[predicted_class_index].upper()}'")
 
     class_probs = [i.round(4) for i in predictions[0]]
     print(class_probs)
